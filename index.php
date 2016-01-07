@@ -1,11 +1,10 @@
 <?php
 
-	require_once "Config/Autoload.php";
-    Config\Autoload::run();
-    $est = new Models\Estudiantes();
-    $est->set('id',1);
-    $datos = $est->view();
+	define('DS', DIRECTORY_SEPARATOR);
+    define('ROOT', realpath(dirname(__FILE__)) . DS);
 
-    print $datos['nombre'];
+    require_once "Config/Autoload.php";
+    Config\AutoLoad::run();
+    Config\Enrutador::run(new Config\Request());
 
 ?>
