@@ -17,10 +17,20 @@
 			$this->con = new Conexion();
 		}
 
+        public function set($atributo, $contenido)
+        {
+            $this->$atributo = $contenido;
+        }
+
+        public function get($atributo)
+        {
+            return $this->$atributo;
+        }
+
 		public function listar()
 		{
-			$sql = "SELECT t1, * t2.nombre as nombre_seccion FROM estudiantes t1 INNER JOIN seccion t2 ON t1.id_seccion = t2.id";
-			$data = $this->con->consultaRetorno($sql);
+			$sql = "SELECT t1.*, t2.nombre as nombre_seccion FROM estudiantes t1 INNER JOIN seccion t2 ON t1.id_seccion = t2.id";
+			$datos = $this->con->consultaRetorno($sql);
 			return $datos;
 		}
 
@@ -39,15 +49,16 @@
 
 		public function edit()
 		{
-			$sql = "UPDATE FROM estudiantes SET nombre = '{$this->nombre}','{$this->edad}','{$this->promedio}','{$this->imagen}','{$this->id_seccion}',NOW() WHERE id = '{$this->id}'";
+			$sql = "UPDATE FROM estudiantes SET nombre = '{$this->nombre}', edad = '{$this->edad}', promedio = '{$this->promedio}', id_seccion = '{$this->id_seccion}' WHERE id = '{$this->id}'";
 			$this->con->consultaSimple($sql);
 		}
 
 		public function view()
 		{
-			$sql = "SELECT t1,*, t2.nombre as nombre_seccion FROM estudiantes t1 INNER JOIN secciones t2 ON t1.id_seccion = t2.id WHERE id = '{$this->id}'";
+			$sql = "SELECT t1.*, t2.nombre as nombre_seccion FROM estudiantes t1 INNER JOIN secciones t2 ON t1.id_seccion = t2.id WHERE t1.id = '{$this->id}'";
 			$datos = $this->con->consultaRetorno($sql);
-			return $datos;
+			$row = mysqli_fetch_assoc($datos);
+			return $row;
 		}
 
 	}
