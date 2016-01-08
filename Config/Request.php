@@ -14,18 +14,31 @@
                 $ruta = filter_input(INPUT_GET, 'url', FILTER_SANITIZE_URL);
                 $ruta = explode("/", $ruta);
                 $ruta = array_filter($ruta);
-                //print_r($ruta);
 
-                $this->controlador = strtolower(array_shift($ruta));
+                if($ruta[0] == "index.php")
+                {
+                    $this->controlador = "estudiantes";
+                }
+                else
+                {
+                    $this->controlador = strtolower(array_shift($ruta));
+                }
+
+                //$this->controlador = strtolower(array_shift($ruta));
                 $this->metodo = strtolower(array_shift($ruta));
 
                 if(!$this->metodo)
                 {
                     $this->metodo = "index";
                 }
+                else
+                {
+                    $this->controlador = "estudiantes";
+                    $this->metodo = "index";
+                }
 
                 $this->argumento = $ruta;
-                //print $this->metodo;
+
             }
         }
 
