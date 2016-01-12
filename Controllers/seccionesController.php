@@ -2,13 +2,21 @@
 
 namespace Controllers;
 
+use Models\Seccion as Seccion;
+
 class seccionesController{
+
+    private $seccion;
+
+    public function __construct()
+    {
+        $this->seccion = new Seccion();
+    }
 
     public function index()
     {
-        print "Hola soy el index de secciones";
+        $datos = $this->seccion->listar();
+        return $datos;
     }
-
 }
-
 ?>

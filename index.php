@@ -8,7 +8,7 @@
      */
     define('ROOT', realpath(dirname(__FILE__)) . DS);
 
-    define('URL','https://localhost/PHP/');
+    define('URL','http://localhost/PHP/');
 
     require_once "Config/Autoload.php";
     Config\AutoLoad::run();

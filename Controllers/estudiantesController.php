@@ -21,6 +21,4 @@
 
     }
 
-    $estudiantes = new estudiantesController();
-
 ?>
